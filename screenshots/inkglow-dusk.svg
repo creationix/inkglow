@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="440" height="470" viewBox="0 0 440 470">
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="470" viewBox="0 0 380 470">
 <defs><style>@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&amp;display=swap'); text { font-family: 'Fira Code', monospace; font-size: 14px; font-variant-ligatures: contextual; }</style></defs>
-<rect width="440" height="470" fill="#080408" rx="6"/>
-<rect width="440" height="34" fill="#050305" rx="6"/>
-<rect y="28" width="440" height="6" fill="#050305"/>
-<text x="220" y="22" text-anchor="middle" fill="#cccccc" font-weight="bold" font-size="14">Inkglow Dusk</text>
+<rect width="380" height="470" fill="#080408" rx="6"/>
+<rect width="380" height="34" fill="#050305" rx="6"/>
+<rect y="28" width="380" height="6" fill="#050305"/>
+<text x="190" y="22" text-anchor="middle" fill="#cccccc" font-weight="bold" font-size="14">Inkglow Dusk</text>
 <circle cx="16" cy="17" r="5" fill="#ff5f57" opacity="0.8"/>
 <circle cx="32" cy="17" r="5" fill="#febc2e" opacity="0.8"/>
 <circle cx="48" cy="17" r="5" fill="#28c840" opacity="0.8"/>
