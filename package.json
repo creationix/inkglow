@@ -34,7 +34,9 @@
     "inkglow-dusk.json",
     "inkglow-gilt.json",
     "themes/",
-    "colors/"
+    "colors/",
+    "screenshots/",
+    "icon-128.png"
   ],
   "scripts": {
     "build": "node build.mjs",
@@ -43,7 +45,8 @@
     "preview": "node preview.mjs",
     "preview:compact": "node preview.mjs --compact",
     "preview:palette": "node preview.mjs --palette",
-    "screenshots": "node screenshots.mjs --readme",
+    "screenshots": "node screenshots.mjs --readme --png",
+    "package": "npx @vscode/vsce package --no-dependencies --readme-path MARKETPLACE.md --skip-license",
     "vscode:prepublish": "node build.mjs"
   },
   "engines": {
