@@ -27,6 +27,7 @@ export function getAllThemes() {
   if (!_themes) {
     _themes = readdirSync(ROOT)
       .filter((f) => f.endsWith(".json") && f !== "scopes.json" && f !== "package.json" && f !== "tsconfig.json")
+      .sort((a, b) => a.split("-").length - b.split("-").length || a.localeCompare(b))
       .map((f) => {
         try {
           const data = JSON.parse(readFileSync(join(ROOT, f), "utf-8"));

@@ -33,6 +33,7 @@ function loadJSON(path) {
 function discoverThemes() {
   return readdirSync(ROOT)
     .filter((f) => f.endsWith(".json") && f !== "scopes.json" && f !== "package.json" && f !== "tsconfig.json")
+    .sort((a, b) => a.split("-").length - b.split("-").length || a.localeCompare(b))
     .map((f) => {
       const data = loadJSON(join(ROOT, f));
       if (data.tokens && data.ui && data.type) return { file: f, data };

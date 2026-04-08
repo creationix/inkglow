@@ -23,7 +23,7 @@ function esc(str) {
 function discoverThemes() {
   return readdirSync(ROOT)
     .filter((f) => f.startsWith("inkglow") && f.endsWith(".json"))
-    .sort()
+    .sort((a, b) => a.split("-").length - b.split("-").length || a.localeCompare(b))
     .map((f) => {
       const data = JSON.parse(readFileSync(join(ROOT, f), "utf-8"));
       if (data.tokens && data.ui && data.type) return { file: f, data };

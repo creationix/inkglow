@@ -20,7 +20,7 @@ Color themes for VS Code and terminal tools. 9 themes across dark/light variants
 
 ### Dark
 
-<img src="screenshots/inkglow-blaze.svg" width="49%"> <img src="screenshots/inkglow-charm.svg" width="49%"> <img src="screenshots/inkglow-dusk.svg" width="49%"> <img src="screenshots/inkglow.svg" width="49%"> 
+<img src="screenshots/inkglow.svg" width="49%"> <img src="screenshots/inkglow-blaze.svg" width="49%"> <img src="screenshots/inkglow-charm.svg" width="49%"> <img src="screenshots/inkglow-dusk.svg" width="49%"> 
 
 ### Light
 
