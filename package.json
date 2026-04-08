@@ -1,38 +1,38 @@
 {
-  "name": "@creationix/vscode-themes",
-  "displayName": "Encantis Themes",
-  "description": "Color themes for VS Code — dark and light variants with curated retro palettes (Sweetie-16, PICO-8, NA16)",
+  "name": "@creationix/inkglow",
+  "displayName": "Inkglow Themes",
+  "description": "Color themes for VS Code — gel-pen darks, earthy lights, and curated retro palettes",
   "version": "0.1.0",
   "publisher": "creationix",
   "license": "MIT",
-  "repository": "https://github.com/creationix/vscode-themes",
+  "repository": "https://github.com/creationix/inkglow",
   "type": "module",
   "main": "./index.mjs",
   "exports": {
     ".": "./index.mjs",
     "./scopes.json": "./scopes.json",
-    "./dark.json": "./dark.json",
-    "./light.json": "./light.json",
-    "./light-blue-orange.json": "./light-blue-orange.json",
-    "./dark-sweetie-16.json": "./dark-sweetie-16.json",
-    "./light-sweetie-16.json": "./light-sweetie-16.json",
-    "./dark-pico-8.json": "./dark-pico-8.json",
-    "./light-pico-8.json": "./light-pico-8.json",
-    "./dark-na16.json": "./dark-na16.json",
-    "./light-na16.json": "./light-na16.json"
+    "./inkglow.json": "./inkglow.json",
+    "./inkglow-quill.json": "./inkglow-quill.json",
+    "./inkglow-storm.json": "./inkglow-storm.json",
+    "./inkglow-charm.json": "./inkglow-charm.json",
+    "./inkglow-frost.json": "./inkglow-frost.json",
+    "./inkglow-blaze.json": "./inkglow-blaze.json",
+    "./inkglow-hearth.json": "./inkglow-hearth.json",
+    "./inkglow-dusk.json": "./inkglow-dusk.json",
+    "./inkglow-gilt.json": "./inkglow-gilt.json"
   },
   "files": [
     "index.mjs",
     "scopes.json",
-    "dark.json",
-    "light.json",
-    "light-blue-orange.json",
-    "dark-sweetie-16.json",
-    "light-sweetie-16.json",
-    "dark-pico-8.json",
-    "light-pico-8.json",
-    "dark-na16.json",
-    "light-na16.json",
+    "inkglow.json",
+    "inkglow-quill.json",
+    "inkglow-storm.json",
+    "inkglow-charm.json",
+    "inkglow-frost.json",
+    "inkglow-blaze.json",
+    "inkglow-hearth.json",
+    "inkglow-dusk.json",
+    "inkglow-gilt.json",
     "themes/"
   ],
   "scripts": {
@@ -42,6 +42,7 @@
     "preview": "node preview.mjs",
     "preview:compact": "node preview.mjs --compact",
     "preview:palette": "node preview.mjs --palette",
+    "screenshots": "node screenshots.mjs --readme",
     "vscode:prepublish": "node build.mjs"
   },
   "engines": {
@@ -53,49 +54,49 @@
   "contributes": {
     "themes": [
       {
-        "label": "Encantis Dark",
+        "label": "Inkglow",
         "uiTheme": "vs-dark",
-        "path": "./themes/dark.json"
+        "path": "./themes/inkglow.json"
       },
       {
-        "label": "Encantis Light",
+        "label": "Inkglow Quill",
         "uiTheme": "vs",
-        "path": "./themes/light.json"
+        "path": "./themes/inkglow-quill.json"
       },
       {
-        "label": "Encantis Light Blue-Orange",
+        "label": "Inkglow Storm",
         "uiTheme": "vs",
-        "path": "./themes/light-blue-orange.json"
+        "path": "./themes/inkglow-storm.json"
       },
       {
-        "label": "Encantis Dark Sweetie-16",
+        "label": "Inkglow Charm",
         "uiTheme": "vs-dark",
-        "path": "./themes/dark-sweetie-16.json"
+        "path": "./themes/inkglow-charm.json"
       },
       {
-        "label": "Encantis Light Sweetie-16",
+        "label": "Inkglow Frost",
         "uiTheme": "vs",
-        "path": "./themes/light-sweetie-16.json"
+        "path": "./themes/inkglow-frost.json"
       },
       {
-        "label": "Encantis Dark PICO-8",
+        "label": "Inkglow Blaze",
         "uiTheme": "vs-dark",
-        "path": "./themes/dark-pico-8.json"
+        "path": "./themes/inkglow-blaze.json"
       },
       {
-        "label": "Encantis Light PICO-8",
+        "label": "Inkglow Hearth",
         "uiTheme": "vs",
-        "path": "./themes/light-pico-8.json"
+        "path": "./themes/inkglow-hearth.json"
       },
       {
-        "label": "Encantis Dark NA16",
+        "label": "Inkglow Dusk",
         "uiTheme": "vs-dark",
-        "path": "./themes/dark-na16.json"
+        "path": "./themes/inkglow-dusk.json"
       },
       {
-        "label": "Encantis Light NA16",
+        "label": "Inkglow Gilt",
         "uiTheme": "vs",
-        "path": "./themes/light-na16.json"
+        "path": "./themes/inkglow-gilt.json"
       }
     ]
   }

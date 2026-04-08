@@ -1,33 +1,30 @@
-# @creationix/vscode-themes
+# Inkglow
 
 Color themes for VS Code and terminal tools. 9 themes across dark/light variants with curated retro palettes.
 
 ## Themes
 
-| Theme             | Type  | Palette                  |
-|-------------------|-------|--------------------------|
-| Dark              | dark  | Custom gel-pen palette   |
-| Light             | light | Warm earthtones          |
-| Light Blue-Orange | light | Blue/orange contrast     |
-| Dark Sweetie-16   | dark  | Sweetie-16 retro palette |
-| Light Sweetie-16  | light | Sweetie-16 retro palette |
-| Dark PICO-8       | dark  | PICO-8 game palette      |
-| Light PICO-8      | light | PICO-8 game palette      |
-| Dark NA16         | dark  | NA16 retro palette       |
-| Light NA16        | light | NA16 retro palette       |
+| Theme | Type | Palette |
+|-------|------|---------|
+| Inkglow | dark | Gel-pen neons on black |
+| Inkglow Quill | light | Warm earthtone inks |
+| Inkglow Storm | light | Blue/orange contrast |
+| Inkglow Charm | dark | Sweetie-16 retro palette |
+| Inkglow Frost | light | Sweetie-16 retro palette |
+| Inkglow Blaze | dark | PICO-8 game palette |
+| Inkglow Hearth | light | PICO-8 game palette |
+| Inkglow Dusk | dark | NA16 retro palette |
+| Inkglow Gilt | light | NA16 retro palette |
 
-## Project structure
+## Preview
 
-```
-├── scopes.json           # Scope registry — all targeted TextMate + semantic scopes
-├── dark.json             # Declarative theme source files (compact, human-readable)
-├── light.json
-├── ...
-├── build.mjs             # Generates VSCode theme JSON into themes/
-├── preview.mjs           # TUI previewer using 256-color ANSI
-├── index.mjs             # npm entry point for CLI tools
-└── themes/               # Generated (gitignored)
-```
+### Dark
+
+<img src="screenshots/inkglow-blaze.svg" width="49%"> <img src="screenshots/inkglow-charm.svg" width="49%"> <img src="screenshots/inkglow-dusk.svg" width="49%"> <img src="screenshots/inkglow.svg" width="49%"> 
+
+### Light
+
+<img src="screenshots/inkglow-frost.svg" width="49%"> <img src="screenshots/inkglow-gilt.svg" width="49%"> <img src="screenshots/inkglow-hearth.svg" width="49%"> <img src="screenshots/inkglow-quill.svg" width="49%"> <img src="screenshots/inkglow-storm.svg" width="49%"> 
 
 ## Declarative theme format
 
@@ -57,12 +54,12 @@ Open this repo in VS Code, then:
 
 Additional tasks available via **Terminal > Run Task**:
 
-| Task         | Description                                   |
-|--------------|-----------------------------------------------|
-| `build`      | Generate VSCode theme JSON into `themes/`     |
-| `check`      | Validate scope coverage without writing files |
-| `report-256` | Show 256-color fidelity for each theme        |
-| `preview`    | TUI preview in the integrated terminal        |
+| Task | Description |
+|------|-------------|
+| `build` | Generate VSCode theme JSON into `themes/` |
+| `check` | Validate scope coverage without writing files |
+| `report-256` | Show 256-color fidelity for each theme |
+| `preview` | TUI preview in the integrated terminal |
 
 ### CLI
 
@@ -72,8 +69,8 @@ node build.mjs --check      # Validate scope coverage without writing
 node build.mjs --report-256 # Show 256-color fidelity for each theme
 
 node preview.mjs            # Preview all themes in terminal (256-color)
-node preview.mjs dark.json  # Preview a specific theme
-node preview.mjs --compact  # Side-by-side view (2 per row)
+node preview.mjs inkglow.json  # Preview a specific theme
+node preview.mjs --compact  # Side-by-side view (auto-fits terminal width)
 node preview.mjs --dark     # Only dark themes
 node preview.mjs --light    # Only light themes
 node preview.mjs --palette  # Show color palette with 256-color mappings
@@ -82,9 +79,9 @@ node preview.mjs --palette  # Show color palette with 256-color mappings
 ## Using in CLI tools
 
 ```js
-import { getTheme, colorize, toAnsi256, getAnsi256Map } from "@creationix/vscode-themes";
+import { getTheme, colorize, toAnsi256, getAnsi256Map } from "@creationix/inkglow";
 
-const dark = getTheme("Dark");
+const dark = getTheme("Inkglow");
 process.stdout.write(colorize(dark, "keyword", "fn "));
 process.stdout.write(colorize(dark, "function", "main"));
 ```
