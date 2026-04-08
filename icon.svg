@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="24" fill="#080808"/>
+
+  <!-- Left brace { — thicker for small sizes -->
+  <path d="M 92,48 C 68,48 56,64 56,84 L 56,112 C 56,126 42,128 42,128 C 42,128 56,130 56,144 L 56,172 C 56,192 68,208 92,208"
+        fill="none" stroke="#ff9944" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Right brace } -->
+  <path d="M 164,48 C 188,48 200,64 200,84 L 200,112 C 200,126 214,128 214,128 C 214,128 200,130 200,144 L 200,172 C 200,192 188,208 164,208"
+        fill="none" stroke="#77bbff" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Inner content — three dots representing code -->
+  <circle cx="116" cy="104" r="9" fill="#a6e22e"/>
+  <circle cx="140" cy="128" r="9" fill="#9988ff"/>
+  <circle cx="116" cy="152" r="9" fill="#55cc99"/>
+</svg>

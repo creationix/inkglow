@@ -1,5 +1,5 @@
 {
-  "name": "@creationix/inkglow",
+  "name": "inkglow",
   "displayName": "Inkglow Themes",
   "description": "Color themes for VS Code — gel-pen darks, earthy lights, and curated retro palettes",
   "version": "0.1.0",
@@ -7,7 +7,6 @@
   "license": "MIT",
   "repository": "https://github.com/creationix/inkglow",
   "type": "module",
-  "main": "./index.mjs",
   "exports": {
     ".": "./index.mjs",
     "./scopes.json": "./scopes.json",
@@ -33,7 +32,8 @@
     "inkglow-hearth.json",
     "inkglow-dusk.json",
     "inkglow-gilt.json",
-    "themes/"
+    "themes/",
+    "colors/"
   ],
   "scripts": {
     "build": "node build.mjs",

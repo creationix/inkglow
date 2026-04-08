@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Build script — reads declarative theme files + scopes.json, generates
-// VSCode color-theme JSON files into themes/, and validates scope coverage.
+// VSCode color-theme JSON files into themes/ and Neovim colorschemes into colors/.
 //
 // Usage:
 //   node build.mjs            # build all themes
@@ -11,6 +11,7 @@ import { join, basename } from "node:path";
 
 const ROOT = import.meta.dirname;
 const THEMES_DIR = join(ROOT, "themes");
+const COLORS_DIR = join(ROOT, "colors");
 
 // ── helpers ──────────────────────────────────────────────────────────────
 
@@ -147,6 +148,186 @@ function validate(themes, scopes) {
   return ok;
 }
 
+// ── build a Neovim colorscheme ────────────────────────────────────────────
+
+// Maps token roles → Neovim highlight groups.
+// Each entry is [role, ...groups]. Groups starting with @ are treesitter captures.
+const VIM_TOKEN_MAP = [
+  // Syntax
+  ["comment",          "Comment", "@comment"],
+  ["keyword",          "Keyword", "Statement", "StorageClass", "@keyword", "@keyword.type", "@keyword.function", "@keyword.modifier"],
+  ["keyword.control",  "Conditional", "Repeat", "Exception", "@keyword.conditional", "@keyword.repeat", "@keyword.return", "@keyword.exception", "@keyword.coroutine"],
+  ["operator",         "Operator", "@operator", "@keyword.operator"],
+  ["string",           "String", "@string"],
+  ["string.regexp",    "@string.regexp"],
+  ["escape",           "SpecialChar", "@string.escape", "@character.special"],
+  ["interpolation",    "@punctuation.special"],
+  ["number",           "Number", "Float", "@number", "@number.float"],
+  ["constant",         "Constant", "@constant", "@constant.builtin", "@variable.builtin"],
+  ["boolean",          "Boolean", "@boolean"],
+  ["type",             "Type", "@type", "@type.builtin"],
+  ["type.user",        "Structure", "@type.definition", "@constructor"],
+  ["type.nominal",     "@type"],       // falls back, custom langs can override
+  ["type.comptime",    "@attribute"],   // closest standard match
+  ["typeParameter",    "@type"],
+  ["function",         "Function", "@function", "@function.call", "@function.builtin", "@function.method", "@function.method.call"],
+  ["variable",         "Identifier", "@variable"],
+  ["variable.constant","@constant", "@constant.macro", "@variable.member"],
+  ["parameter",        "@variable.parameter", "@variable.parameter.builtin"],
+  ["parameter.output", "@variable.parameter"],
+  ["variable.global",  "@variable.builtin"],
+  ["property",         "@property", "@variable.member"],
+  ["tag",              "Tag", "@tag", "@tag.builtin"],
+  ["tag.punctuation",  "@tag.delimiter"],
+  ["attribute",        "@attribute", "@attribute.builtin", "@tag.attribute"],
+  ["accessor",         "@punctuation.delimiter"],
+  ["bracket",          "@punctuation.bracket"],
+  ["pointer",          "@punctuation.special"],
+  ["typepun",          "@punctuation.special"],
+  ["punctuation",      "Delimiter", "@punctuation.delimiter"],
+  ["invalid",          "Error"],
+  ["deprecated",       "DiagnosticDeprecated"],
+  ["support",          "Special"],
+  ["preprocessor",     "PreProc", "Include", "Define", "Macro", "@keyword.directive", "@keyword.directive.define", "@keyword.import"],
+  ["label",            "Label", "@label"],
+  ["link",             "Underlined", "@markup.link.url", "@string.special.url"],
+
+  // Markup
+  ["markup.heading",   "Title", "@markup.heading", "@markup.heading.1", "@markup.heading.2", "@markup.heading.3", "@markup.heading.4", "@markup.heading.5", "@markup.heading.6"],
+  ["markup.bold",      "@markup.strong"],
+  ["markup.italic",    "@markup.italic"],
+  ["markup.boldItalic","@markup.strong"],  // neovim doesn't have a bolditalic group
+  ["markup.underline", "@markup.underline"],
+  ["markup.strikethrough", "@markup.strikethrough"],
+  ["markup.link",      "@markup.link"],
+  ["markup.link.text", "@markup.link.label"],
+  ["markup.code.inline","@markup.raw"],
+  ["markup.code.block","@markup.raw.block"],
+  ["markup.quote",     "@markup.quote"],
+  ["markup.list",      "@markup.list", "@markup.list.checked", "@markup.list.unchecked"],
+  ["markup.separator", "@punctuation.special"],
+  ["markup.inserted",  "DiffAdd", "@diff.plus"],
+  ["markup.deleted",   "DiffDelete", "@diff.minus"],
+  ["markup.changed",   "DiffChange", "@diff.delta"],
+  ["diff.range",       "DiffText"],
+  ["diff.header",      "DiffText"],
+
+  // Language-specific
+  ["json.property",    "@property"],
+  ["css.property",     "@property"],
+  ["css.selector",     "@type"],
+  ["css.value",        "@string"],
+];
+
+// Maps semantic token types → @lsp.type.* groups
+const VIM_SEMANTIC_MAP = {
+  "parameter":                "@lsp.type.parameter",
+  "parameter.output":         "@lsp.type.parameter",
+  "variable":                 "@lsp.type.variable",
+  "variable.readonly":        "@lsp.mod.readonly",
+  "variable.static":          "@lsp.mod.static",
+  "variable.static.readonly": "@lsp.mod.static",
+  "function":                 "@lsp.type.function",
+  "function.declaration":     "@lsp.type.function",
+  "type":                     "@lsp.type.type",
+  "type.declaration":         "@lsp.type.type",
+};
+
+function buildNeovimTheme(theme) {
+  const { data } = theme;
+  const name = basename(theme.file, ".json");
+  const label = data.label || data.name;
+
+  /** Convert parsed token value to Lua hl opts string. */
+  function hlOpts(value) {
+    const parsed = parseTokenValue(value);
+    const parts = [`fg = "${parsed.foreground}"`];
+    if (parsed.fontStyle) {
+      if (parsed.fontStyle.includes("italic")) parts.push("italic = true");
+      if (parsed.fontStyle.includes("bold")) parts.push("bold = true");
+      if (parsed.fontStyle.includes("strikethrough")) parts.push("strikethrough = true");
+      if (parsed.fontStyle.includes("underline")) parts.push("underline = true");
+    }
+    return `{ ${parts.join(", ")} }`;
+  }
+
+  let lua = `-- ${label} — generated by build.mjs, do not edit\n`;
+  lua += `vim.cmd("hi clear")\n`;
+  lua += `vim.g.colors_name = "${name}"\n`;
+  lua += `local h = vim.api.nvim_set_hl\n\n`;
+
+  // UI highlights
+  lua += `-- UI\n`;
+  lua += `h(0, "Normal", { fg = "${data.ui.foreground}", bg = "${data.ui.background}" })\n`;
+  lua += `h(0, "NormalFloat", { fg = "${data.ui.foreground}", bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "FloatBorder", { fg = "${data.ui.lineNumber}", bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "CursorLine", { bg = "${data.ui.lineHighlight}" })\n`;
+  lua += `h(0, "CursorLineNr", { fg = "${data.ui.lineNumberActive}" })\n`;
+  lua += `h(0, "Visual", { bg = "${data.ui.selection}" })\n`;
+  lua += `h(0, "LineNr", { fg = "${data.ui.lineNumber}" })\n`;
+  lua += `h(0, "SignColumn", { bg = "${data.ui.background}" })\n`;
+  lua += `h(0, "FoldColumn", { fg = "${data.ui.lineNumber}", bg = "${data.ui.background}" })\n`;
+  lua += `h(0, "Folded", { fg = "${data.ui.lineNumberActive}", bg = "${data.ui.lineHighlight}" })\n`;
+  lua += `h(0, "MatchParen", { bg = "${data.ui.bracketMatchBg}" })\n`;
+  lua += `h(0, "Pmenu", { fg = "${data.ui.foreground}", bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "PmenuSel", { bg = "${data.ui.selection}" })\n`;
+  lua += `h(0, "PmenuSbar", { bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "PmenuThumb", { bg = "${data.ui.lineNumber}" })\n`;
+  lua += `h(0, "StatusLine", { fg = "${data.ui.foreground}", bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "StatusLineNC", { fg = "${data.ui.lineNumber}", bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "TabLine", { fg = "${data.ui.lineNumber}", bg = "${data.ui.tabInactive}" })\n`;
+  lua += `h(0, "TabLineSel", { fg = "${data.ui.foreground}", bg = "${data.ui.tabActive}" })\n`;
+  lua += `h(0, "TabLineFill", { bg = "${data.ui.panel}" })\n`;
+  lua += `h(0, "WinSeparator", { fg = "${data.ui.indentGuide}" })\n`;
+  lua += `h(0, "NonText", { fg = "${data.ui.indentGuide}" })\n`;
+  lua += `h(0, "SpecialKey", { fg = "${data.ui.indentGuide}" })\n`;
+  lua += `h(0, "EndOfBuffer", { fg = "${data.ui.indentGuide}" })\n`;
+  lua += `h(0, "Search", { bg = "${data.ui.selection}" })\n`;
+  lua += `h(0, "IncSearch", { bg = "${data.ui.bracketMatchBg}" })\n`;
+
+  // Diagnostics — derive from theme colors
+  const errorColor = data.tokens.invalid?.split(/\s+/)[0] || "#ff4444";
+  const warnColor = data.tokens.number?.split(/\s+/)[0] || "#eebb55";
+  const infoColor = data.tokens["keyword.control"]?.split(/\s+/)[0] || "#77bbff";
+  const hintColor = data.tokens.comment?.split(/\s+/)[0] || "#888888";
+  lua += `\n-- Diagnostics\n`;
+  lua += `h(0, "DiagnosticError", { fg = "${errorColor}" })\n`;
+  lua += `h(0, "DiagnosticWarn", { fg = "${warnColor}" })\n`;
+  lua += `h(0, "DiagnosticInfo", { fg = "${infoColor}" })\n`;
+  lua += `h(0, "DiagnosticHint", { fg = "${hintColor}" })\n`;
+  lua += `h(0, "DiagnosticUnderlineError", { undercurl = true, sp = "${errorColor}" })\n`;
+  lua += `h(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "${warnColor}" })\n`;
+  lua += `h(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "${infoColor}" })\n`;
+  lua += `h(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "${hintColor}" })\n`;
+
+  // Token highlights — syntax + treesitter
+  lua += `\n-- Syntax & Treesitter\n`;
+  const seen = new Set();
+  for (const [role, ...groups] of VIM_TOKEN_MAP) {
+    const value = data.tokens[role];
+    if (!value) continue;
+    const opts = hlOpts(value);
+    for (const group of groups) {
+      if (seen.has(group)) continue;
+      seen.add(group);
+      lua += `h(0, "${group}", ${opts})\n`;
+    }
+  }
+
+  // Semantic / LSP highlights
+  if (data.semantic) {
+    lua += `\n-- LSP semantic tokens\n`;
+    for (const [semRole, group] of Object.entries(VIM_SEMANTIC_MAP)) {
+      const value = data.semantic[semRole];
+      if (!value || seen.has(group)) continue;
+      seen.add(group);
+      lua += `h(0, "${group}", ${hlOpts(value)})\n`;
+    }
+  }
+
+  return lua;
+}
+
 // ── ANSI 256 color utilities ─────────────────────────────────────────────
 
 const CUBE_VALUES = [0, 0x5f, 0x87, 0xaf, 0xd7, 0xff];
@@ -249,13 +430,21 @@ if (checkOnly) {
 
 // Write generated themes
 mkdirSync(THEMES_DIR, { recursive: true });
+mkdirSync(COLORS_DIR, { recursive: true });
 
 for (const theme of themes) {
   const outName = basename(theme.file);
-  const outPath = join(THEMES_DIR, outName);
+  const baseName = basename(theme.file, ".json");
+
+  // VSCode
   const vsTheme = buildVSCodeTheme(theme, scopes);
-  writeFileSync(outPath, JSON.stringify(vsTheme, null, 2) + "\n");
+  writeFileSync(join(THEMES_DIR, outName), JSON.stringify(vsTheme, null, 2) + "\n");
   console.log(`  → themes/${outName}`);
+
+  // Neovim
+  const lua = buildNeovimTheme(theme);
+  writeFileSync(join(COLORS_DIR, `${baseName}.lua`), lua);
+  console.log(`  → colors/${baseName}.lua`);
 }
 
 console.log("\nDone.");

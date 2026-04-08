@@ -1,6 +1,8 @@
 # Inkglow
 
-Color themes for VS Code and terminal tools. 9 themes across dark/light variants with curated retro palettes.
+Color themes for VS Code, Neovim, and terminal tools. 9 themes across dark/light variants with curated retro palettes.
+
+All themes are defined once as compact, human-readable JSON files and built into VS Code themes, Neovim colorschemes, and an importable JS API from the same source.
 
 ## Themes
 
@@ -26,6 +28,92 @@ Color themes for VS Code and terminal tools. 9 themes across dark/light variants
 
 <img src="screenshots/inkglow-frost.svg" width="49%"> <img src="screenshots/inkglow-gilt.svg" width="49%"> <img src="screenshots/inkglow-hearth.svg" width="49%"> <img src="screenshots/inkglow-quill.svg" width="49%"> <img src="screenshots/inkglow-storm.svg" width="49%"> 
 
+## Install
+
+### VS Code
+
+Install from the VS Code Marketplace, or from source:
+
+```sh
+git clone https://github.com/creationix/inkglow.git
+cd inkglow
+node build.mjs
+code --install-extension .
+```
+
+### Neovim
+
+Add the repo with your plugin manager, then set the colorscheme:
+
+```lua
+-- lazy.nvim
+{ "creationix/inkglow", build = "node build.mjs" }
+
+-- packer
+use { "creationix/inkglow", run = "node build.mjs" }
+```
+
+```vim
+colorscheme inkglow          " flagship dark
+colorscheme inkglow-dusk     " or any variant
+```
+
+![Inkglow Charm in Neovim](previews/inkglow-charm-neovim.png)
+*Inkglow Charm theme in Neovim with Treesitter highlighting*
+
+### CLI tools (npm)
+
+```sh
+npm install @creationix/inkglow
+```
+
+Import the theme data directly in Node.js tools, REPLs, or terminal applications:
+
+```js
+import { getTheme, colorize, toAnsi256, getAnsi256Map } from "@creationix/inkglow";
+
+// Get a theme by name
+const theme = getTheme("Inkglow");
+
+// Colorize text for terminal output using 256-color ANSI codes
+process.stdout.write(colorize(theme, "keyword", "fn "));
+process.stdout.write(colorize(theme, "function", "fibonacci"));
+process.stdout.write(colorize(theme, "bracket", "("));
+process.stdout.write(colorize(theme, "parameter", "n"));
+process.stdout.write(colorize(theme, "bracket", ")"));
+
+// Get the ANSI 256-color code for any hex color
+const code = toAnsi256("#ff9944"); // → 209
+
+// Get a full lookup table for building your own renderer
+const map = getAnsi256Map(theme);
+// map.keyword  → { code: 209, fontStyle: undefined }
+// map.comment  → { code: 103, fontStyle: "italic" }
+```
+
+You can also import individual theme JSON files directly:
+
+```js
+import inkglow from "@creationix/inkglow/inkglow.json" with { type: "json" };
+import scopes from "@creationix/inkglow/scopes.json" with { type: "json" };
+```
+
+## Project structure
+
+```
+├── scopes.json           # Scope registry — all targeted TextMate + semantic scopes
+├── inkglow.json          # Declarative theme source files (compact, human-readable)
+├── inkglow-quill.json
+├── ...
+├── build.mjs             # Generates themes/ (VS Code) and colors/ (Neovim)
+├── preview.mjs           # TUI previewer using 256-color ANSI
+├── screenshots.mjs       # SVG screenshot generator
+├── index.mjs             # npm entry point for CLI tools
+├── themes/               # Generated VS Code themes (gitignored)
+├── colors/               # Generated Neovim colorschemes (gitignored)
+└── screenshots/          # Generated SVG previews
+```
+
 ## Declarative theme format
 
 Each theme file at the root is a compact JSON mapping of token roles to `"#color style"` values:
@@ -43,28 +131,19 @@ Each theme file at the root is a compact JSON mapping of token roles to `"#color
 }
 ```
 
-The role names map to TextMate scopes via `scopes.json`. This makes themes easy to compare side-by-side.
+The role names map to TextMate scopes (via `scopes.json`), Vim syntax groups, and Treesitter captures. This makes themes easy to compare side-by-side and keeps the single source of truth for all output formats.
 
 ## Development
 
 Open this repo in VS Code, then:
 
 - **F5** — launches an Extension Development Host with the themes loaded (runs `build` automatically)
-- **Cmd+Shift+B** — run the default build task (`node build.mjs`)
-
-Additional tasks available via **Terminal > Run Task**:
-
-| Task | Description |
-|------|-------------|
-| `build` | Generate VSCode theme JSON into `themes/` |
-| `check` | Validate scope coverage without writing files |
-| `report-256` | Show 256-color fidelity for each theme |
-| `preview` | TUI preview in the integrated terminal |
+- **Cmd+Shift+B** — run the default build task
 
 ### CLI
 
 ```sh
-node build.mjs              # Generate VSCode themes into themes/
+node build.mjs              # Generate VS Code themes + Neovim colorschemes
 node build.mjs --check      # Validate scope coverage without writing
 node build.mjs --report-256 # Show 256-color fidelity for each theme
 
@@ -74,16 +153,8 @@ node preview.mjs --compact  # Side-by-side view (auto-fits terminal width)
 node preview.mjs --dark     # Only dark themes
 node preview.mjs --light    # Only light themes
 node preview.mjs --palette  # Show color palette with 256-color mappings
-```
 
-## Using in CLI tools
-
-```js
-import { getTheme, colorize, toAnsi256, getAnsi256Map } from "@creationix/inkglow";
-
-const dark = getTheme("Inkglow");
-process.stdout.write(colorize(dark, "keyword", "fn "));
-process.stdout.write(colorize(dark, "function", "main"));
+node screenshots.mjs --readme  # Regenerate SVG previews + update README
 ```
 
 ## Scope registry
