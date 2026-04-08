@@ -1,0 +1,102 @@
+{
+  "name": "@creationix/vscode-themes",
+  "displayName": "Encantis Themes",
+  "description": "Color themes for VS Code — dark and light variants with curated retro palettes (Sweetie-16, PICO-8, NA16)",
+  "version": "0.1.0",
+  "publisher": "creationix",
+  "license": "MIT",
+  "repository": "https://github.com/creationix/vscode-themes",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./scopes.json": "./scopes.json",
+    "./dark.json": "./dark.json",
+    "./light.json": "./light.json",
+    "./light-blue-orange.json": "./light-blue-orange.json",
+    "./dark-sweetie-16.json": "./dark-sweetie-16.json",
+    "./light-sweetie-16.json": "./light-sweetie-16.json",
+    "./dark-pico-8.json": "./dark-pico-8.json",
+    "./light-pico-8.json": "./light-pico-8.json",
+    "./dark-na16.json": "./dark-na16.json",
+    "./light-na16.json": "./light-na16.json"
+  },
+  "files": [
+    "index.mjs",
+    "scopes.json",
+    "dark.json",
+    "light.json",
+    "light-blue-orange.json",
+    "dark-sweetie-16.json",
+    "light-sweetie-16.json",
+    "dark-pico-8.json",
+    "light-pico-8.json",
+    "dark-na16.json",
+    "light-na16.json",
+    "themes/"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node build.mjs --check",
+    "report-256": "node build.mjs --report-256",
+    "preview": "node preview.mjs",
+    "preview:compact": "node preview.mjs --compact",
+    "preview:palette": "node preview.mjs --palette",
+    "vscode:prepublish": "node build.mjs"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Encantis Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark.json"
+      },
+      {
+        "label": "Encantis Light",
+        "uiTheme": "vs",
+        "path": "./themes/light.json"
+      },
+      {
+        "label": "Encantis Light Blue-Orange",
+        "uiTheme": "vs",
+        "path": "./themes/light-blue-orange.json"
+      },
+      {
+        "label": "Encantis Dark Sweetie-16",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-sweetie-16.json"
+      },
+      {
+        "label": "Encantis Light Sweetie-16",
+        "uiTheme": "vs",
+        "path": "./themes/light-sweetie-16.json"
+      },
+      {
+        "label": "Encantis Dark PICO-8",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-pico-8.json"
+      },
+      {
+        "label": "Encantis Light PICO-8",
+        "uiTheme": "vs",
+        "path": "./themes/light-pico-8.json"
+      },
+      {
+        "label": "Encantis Dark NA16",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-na16.json"
+      },
+      {
+        "label": "Encantis Light NA16",
+        "uiTheme": "vs",
+        "path": "./themes/light-na16.json"
+      }
+    ]
+  }
+}

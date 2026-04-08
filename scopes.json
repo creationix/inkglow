@@ -1,0 +1,603 @@
+{
+  "$comment": "Scope registry — lists every TextMate scope and semantic token that themes in this extension target. Used by build.mjs to generate VSCode theme files, and as a cross-reference for language grammar authors to ensure their scopes get highlighted.",
+
+  "tokenRoles": {
+    "comment": {
+      "description": "Code comments — line, block, and doc comments",
+      "scopes": [
+        "comment",
+        "comment.line",
+        "comment.line.double-slash",
+        "comment.line.number-sign",
+        "comment.line.semicolon",
+        "comment.block",
+        "comment.block.documentation",
+        "punctuation.definition.comment",
+        "string.comment"
+      ]
+    },
+    "keyword": {
+      "description": "Declaration/storage keywords (let, const, var, fn, struct, type, etc.)",
+      "scopes": [
+        "keyword",
+        "storage.type",
+        "storage",
+        "storage.modifier"
+      ]
+    },
+    "keyword.control": {
+      "description": "Control flow keywords (if, else, for, while, return, break, continue, match)",
+      "scopes": [
+        "keyword.control",
+        "keyword.control.loop",
+        "keyword.control.conditional",
+        "keyword.control.flow",
+        "keyword.control.import",
+        "keyword.control.export",
+        "keyword.control.trycatch",
+        "keyword.control.exception"
+      ]
+    },
+    "operator": {
+      "description": "Operators — arithmetic, logical, comparison, assignment, bitwise",
+      "scopes": [
+        "keyword.operator",
+        "keyword.operator.arrow",
+        "keyword.operator.assignment",
+        "keyword.operator.comparison",
+        "keyword.operator.logical",
+        "keyword.operator.arithmetic",
+        "keyword.operator.bitwise",
+        "keyword.operator.ternary",
+        "keyword.operator.spread",
+        "keyword.operator.rest",
+        "keyword.operator.typeof",
+        "keyword.operator.instanceof",
+        "keyword.operator.expression",
+        "keyword.operator.new",
+        "keyword.operator.delete",
+        "keyword.operator.cast",
+        "keyword.operator.sizeof",
+        "keyword.operator.alignof",
+        "keyword.operator.wordlike"
+      ]
+    },
+    "string": {
+      "description": "String literals — single-quoted, double-quoted, template, multiline",
+      "scopes": [
+        "string",
+        "string.quoted",
+        "string.quoted.double",
+        "string.quoted.single",
+        "string.quoted.other",
+        "string.quoted.triple",
+        "string.template",
+        "meta.embedded.assembly"
+      ]
+    },
+    "string.regexp": {
+      "description": "Regular expression literals",
+      "scopes": [
+        "string.regexp",
+        "source.regexp",
+        "constant.regexp",
+        "string.regexp.character-class",
+        "string.regexp.arbitrary-repitition"
+      ]
+    },
+    "escape": {
+      "description": "Escape sequences inside strings (\\n, \\t, \\x00, etc.)",
+      "scopes": [
+        "constant.character.escape",
+        "string.regexp constant.character.escape"
+      ]
+    },
+    "interpolation": {
+      "description": "String interpolation/template expression delimiters",
+      "scopes": [
+        "punctuation.definition.template-expression.begin",
+        "punctuation.definition.template-expression.end",
+        "punctuation.section.embedded",
+        "punctuation.section.embedded.begin",
+        "punctuation.section.embedded.end"
+      ]
+    },
+    "number": {
+      "description": "Numeric literals — decimal, float, hex, binary, octal",
+      "scopes": [
+        "constant.numeric",
+        "constant.numeric.decimal",
+        "constant.numeric.integer",
+        "constant.numeric.float",
+        "constant.numeric.hex",
+        "constant.numeric.binary",
+        "constant.numeric.octal",
+        "constant.numeric.dozenal",
+        "keyword.other.unit"
+      ]
+    },
+    "constant": {
+      "description": "Language constants — null, undefined, nil, none, etc.",
+      "scopes": [
+        "constant.language",
+        "variable.language"
+      ]
+    },
+    "boolean": {
+      "description": "Boolean literals — true, false",
+      "scopes": [
+        "constant.language.boolean"
+      ]
+    },
+    "type": {
+      "description": "Built-in/primitive type names",
+      "scopes": [
+        "entity.name.type",
+        "support.type.builtin",
+        "support.type.primitive"
+      ]
+    },
+    "type.user": {
+      "description": "User-defined type names — classes, interfaces, structs, enums",
+      "scopes": [
+        "support.type",
+        "entity.name.type.class",
+        "entity.name.type.struct",
+        "entity.name.type.enum",
+        "entity.name.type.interface",
+        "entity.name.type.alias",
+        "entity.name.type.module",
+        "entity.name.namespace",
+        "entity.other.inherited-class",
+        "support.class"
+      ]
+    },
+    "type.nominal": {
+      "description": "Nominal/newtype wrappers — distinct types with same representation",
+      "scopes": [
+        "support.type.nominal"
+      ]
+    },
+    "type.comptime": {
+      "description": "Compile-time / type-level computation types",
+      "scopes": [
+        "support.type.comptime"
+      ]
+    },
+    "typeParameter": {
+      "description": "Generic type parameters (T, U, etc.)",
+      "scopes": [
+        "entity.name.type.parameter",
+        "support.type.parameter"
+      ]
+    },
+    "function": {
+      "description": "Function and method names",
+      "scopes": [
+        "entity.name.function",
+        "support.function",
+        "entity.name.operator.custom-literal",
+        "support.constant.handlebars"
+      ]
+    },
+    "variable": {
+      "description": "Local variable references",
+      "scopes": [
+        "variable",
+        "variable.other",
+        "meta.definition.variable.name",
+        "entity.name.variable"
+      ]
+    },
+    "variable.constant": {
+      "description": "Constants and enum members",
+      "scopes": [
+        "variable.other.constant",
+        "variable.other.enummember",
+        "entity.name.constant"
+      ]
+    },
+    "parameter": {
+      "description": "Function/method parameter names",
+      "scopes": [
+        "variable.parameter",
+        "variable.parameter.function"
+      ]
+    },
+    "parameter.output": {
+      "description": "Output/out/inout parameter names",
+      "scopes": [
+        "variable.parameter.output"
+      ]
+    },
+    "variable.global": {
+      "description": "Global/module-level variable references",
+      "scopes": [
+        "variable.other.global"
+      ]
+    },
+    "property": {
+      "description": "Object/struct property and field names",
+      "scopes": [
+        "variable.other.property",
+        "variable.other.object.property",
+        "support.variable",
+        "meta.object-literal.key",
+        "meta.property-name",
+        "support.type.vendored.property-name",
+        "support.type.property-name"
+      ]
+    },
+    "tag": {
+      "description": "HTML/XML/JSX tag names",
+      "scopes": [
+        "entity.name.tag",
+        "support.class.component"
+      ]
+    },
+    "tag.punctuation": {
+      "description": "Tag bracket punctuation (< > />)",
+      "scopes": [
+        "punctuation.definition.tag",
+        "punctuation.definition.tag.begin",
+        "punctuation.definition.tag.end"
+      ]
+    },
+    "attribute": {
+      "description": "HTML/XML attribute names, decorators, annotations",
+      "scopes": [
+        "entity.other.attribute-name",
+        "entity.name.decorator",
+        "meta.decorator",
+        "entity.name.function.decorator"
+      ]
+    },
+    "accessor": {
+      "description": "Property access punctuation (. :: ->)",
+      "scopes": [
+        "punctuation.accessor",
+        "punctuation.accessor.property",
+        "punctuation.accessor.tuple",
+        "punctuation.separator.dot-access"
+      ]
+    },
+    "bracket": {
+      "description": "Brackets — parentheses, braces, square brackets",
+      "scopes": [
+        "punctuation.bracket",
+        "keyword.operator.bracket",
+        "punctuation.definition.block",
+        "punctuation.definition.parameters",
+        "punctuation.definition.arguments"
+      ]
+    },
+    "pointer": {
+      "description": "Pointer/dereference punctuation (* & ->)",
+      "scopes": [
+        "punctuation.accessor.pointer"
+      ]
+    },
+    "typepun": {
+      "description": "Type punning / reinterpret cast accessor",
+      "scopes": [
+        "punctuation.accessor.typepun"
+      ]
+    },
+    "punctuation": {
+      "description": "General punctuation — commas, semicolons, colons",
+      "scopes": [
+        "punctuation.separator",
+        "punctuation.separator.comma",
+        "punctuation.terminator",
+        "punctuation.terminator.statement"
+      ]
+    },
+    "invalid": {
+      "description": "Invalid/illegal syntax",
+      "scopes": [
+        "invalid",
+        "invalid.illegal"
+      ]
+    },
+    "deprecated": {
+      "description": "Deprecated code",
+      "scopes": [
+        "invalid.deprecated"
+      ]
+    },
+    "support": {
+      "description": "Built-in/library support references (catch-all)",
+      "scopes": [
+        "support",
+        "support.constant",
+        "support.other"
+      ]
+    },
+    "meta.embedded": {
+      "description": "Embedded code in templates/strings",
+      "scopes": [
+        "meta.embedded",
+        "source.groovy.embedded",
+        "meta.template.expression"
+      ]
+    },
+    "label": {
+      "description": "Labels and goto targets",
+      "scopes": [
+        "entity.name.label"
+      ]
+    },
+    "preprocessor": {
+      "description": "Preprocessor directives (#include, #define, etc.)",
+      "scopes": [
+        "meta.preprocessor",
+        "entity.name.function.preprocessor",
+        "keyword.control.directive"
+      ]
+    },
+    "link": {
+      "description": "Links and URIs in code",
+      "scopes": [
+        "constant.other.reference.link",
+        "string.other.link"
+      ]
+    },
+
+    "markup.heading": {
+      "description": "Markdown/markup headings",
+      "scopes": [
+        "markup.heading",
+        "heading.1.markdown",
+        "heading.2.markdown",
+        "heading.3.markdown",
+        "heading.4.markdown",
+        "heading.5.markdown",
+        "heading.6.markdown",
+        "entity.name.section",
+        "entity.name.section.markdown",
+        "markup.heading entity.name"
+      ]
+    },
+    "markup.heading.punctuation": {
+      "description": "Heading punctuation (# in markdown)",
+      "scopes": [
+        "punctuation.definition.heading.markdown"
+      ]
+    },
+    "markup.bold": {
+      "description": "Bold markup text",
+      "scopes": [
+        "markup.bold",
+        "markup.bold.markdown"
+      ]
+    },
+    "markup.italic": {
+      "description": "Italic markup text",
+      "scopes": [
+        "markup.italic",
+        "markup.italic.markdown"
+      ]
+    },
+    "markup.boldItalic": {
+      "description": "Bold italic markup text",
+      "scopes": [
+        "markup.bold markup.italic",
+        "markup.italic markup.bold"
+      ]
+    },
+    "markup.underline": {
+      "description": "Underlined markup text",
+      "scopes": [
+        "markup.underline"
+      ]
+    },
+    "markup.strikethrough": {
+      "description": "Strikethrough markup text",
+      "scopes": [
+        "markup.strikethrough",
+        "markup.strikethrough.markdown"
+      ]
+    },
+    "markup.link": {
+      "description": "Link URLs in markup",
+      "scopes": [
+        "markup.underline.link",
+        "markup.underline.link.markdown",
+        "markup.underline.link.image.markdown",
+        "string.other.link.description.markdown"
+      ]
+    },
+    "markup.link.text": {
+      "description": "Link display text in markup",
+      "scopes": [
+        "string.other.link.title.markdown"
+      ]
+    },
+    "markup.code.inline": {
+      "description": "Inline code spans in markup",
+      "scopes": [
+        "markup.inline.raw",
+        "markup.inline.raw.string.markdown",
+        "markup.raw.inline.markdown"
+      ]
+    },
+    "markup.code.block": {
+      "description": "Fenced code blocks in markup",
+      "scopes": [
+        "markup.fenced_code.block.markdown",
+        "markup.raw.block.markdown"
+      ]
+    },
+    "markup.code.language": {
+      "description": "Code fence language identifier",
+      "scopes": [
+        "fenced_code.block.language.markdown"
+      ]
+    },
+    "markup.quote": {
+      "description": "Block quotes in markup",
+      "scopes": [
+        "markup.quote",
+        "markup.quote.markdown",
+        "punctuation.definition.quote.begin.markdown"
+      ]
+    },
+    "markup.list": {
+      "description": "List item punctuation in markup",
+      "scopes": [
+        "punctuation.definition.list.begin.markdown",
+        "beginning.punctuation.definition.list.markdown"
+      ]
+    },
+    "markup.separator": {
+      "description": "Horizontal rules / separators in markup",
+      "scopes": [
+        "meta.separator",
+        "meta.separator.markdown"
+      ]
+    },
+    "markup.inserted": {
+      "description": "Inserted text (diffs, version control)",
+      "scopes": [
+        "markup.inserted",
+        "meta.diff.header.to-file",
+        "punctuation.definition.inserted"
+      ]
+    },
+    "markup.deleted": {
+      "description": "Deleted text (diffs, version control)",
+      "scopes": [
+        "markup.deleted",
+        "meta.diff.header.from-file",
+        "punctuation.definition.deleted"
+      ]
+    },
+    "markup.changed": {
+      "description": "Changed text (diffs, version control)",
+      "scopes": [
+        "markup.changed",
+        "punctuation.definition.changed"
+      ]
+    },
+    "diff.range": {
+      "description": "Diff range header (@@ lines)",
+      "scopes": [
+        "meta.diff.range"
+      ]
+    },
+    "diff.header": {
+      "description": "Diff file header",
+      "scopes": [
+        "meta.diff.header"
+      ]
+    },
+
+    "json.property": {
+      "description": "JSON property keys",
+      "scopes": [
+        "support.type.property-name.json",
+        "support.type.property-name.json.comments"
+      ]
+    },
+    "css.property": {
+      "description": "CSS property names",
+      "scopes": [
+        "support.type.property-name.css",
+        "support.type.property-name.less",
+        "support.type.property-name.scss"
+      ]
+    },
+    "css.selector": {
+      "description": "CSS selectors — classes, IDs, pseudo-elements",
+      "scopes": [
+        "entity.other.attribute-name.class.css",
+        "entity.other.attribute-name.id.css",
+        "entity.other.attribute-name.pseudo-class.css",
+        "entity.other.attribute-name.pseudo-element.css",
+        "entity.other.attribute-name.scss",
+        "entity.name.tag.css",
+        "entity.name.tag.less"
+      ]
+    },
+    "css.value": {
+      "description": "CSS property values and color values",
+      "scopes": [
+        "support.constant.property-value",
+        "support.constant.color",
+        "support.constant.font-name",
+        "support.constant.media-type",
+        "support.constant.media",
+        "constant.other.color.rgb-value",
+        "constant.other.rgb-value"
+      ]
+    }
+  },
+
+  "semanticTokenTypes": {
+    "namespace":                { "description": "Namespace declarations and references" },
+    "type":                     { "description": "Type references" },
+    "type.declaration":         { "description": "Type declarations (definition site)" },
+    "class":                    { "description": "Class references" },
+    "class.declaration":        { "description": "Class declarations" },
+    "enum":                     { "description": "Enum type references" },
+    "interface":                { "description": "Interface type references" },
+    "struct":                   { "description": "Struct type references" },
+    "typeParameter":            { "description": "Generic type parameters (<T>, etc.)" },
+    "parameter":                { "description": "Function/method parameters" },
+    "parameter.output":         { "description": "Output/inout parameters" },
+    "variable":                 { "description": "Local variable references" },
+    "variable.readonly":        { "description": "Read-only / const variables" },
+    "variable.static":          { "description": "Static / global variables" },
+    "variable.static.readonly": { "description": "Static read-only / module constants" },
+    "property":                 { "description": "Object/struct property references" },
+    "property.readonly":        { "description": "Read-only properties" },
+    "property.static":          { "description": "Static properties" },
+    "enumMember":               { "description": "Enum member references" },
+    "event":                    { "description": "Event references" },
+    "function":                 { "description": "Function references" },
+    "function.declaration":     { "description": "Function declarations (definition site)" },
+    "method":                   { "description": "Method references" },
+    "method.declaration":       { "description": "Method declarations" },
+    "macro":                    { "description": "Macro references" },
+    "macro.readonly":           { "description": "Read-only macro references" },
+    "decorator":                { "description": "Decorators / annotations" },
+    "keyword":                  { "description": "Keywords (semantic overlay)" },
+    "modifier":                 { "description": "Modifier keywords (pub, mut, async, etc.)" },
+    "comment":                  { "description": "Comments (semantic overlay)" },
+    "string":                   { "description": "Strings (semantic overlay)" },
+    "number":                   { "description": "Numbers (semantic overlay)" },
+    "regexp":                   { "description": "Regular expressions (semantic overlay)" },
+    "operator":                 { "description": "Operators (semantic overlay)" },
+    "newOperator":              { "description": "new operator specifically" },
+    "stringLiteral":            { "description": "String literals (C++ semantic)" },
+    "customLiteral":            { "description": "Custom/user-defined literals (C++)" },
+    "numberLiteral":            { "description": "Number literals (C++ semantic)" }
+  },
+
+  "uiRoles": {
+    "background":          { "key": "editor.background",                              "description": "Main editor background" },
+    "foreground":          { "key": "editor.foreground",                              "description": "Default editor text color" },
+    "cursor":              { "key": "editorCursor.foreground",                        "description": "Cursor/caret color" },
+    "lineHighlight":       { "key": "editor.lineHighlightBackground",                "description": "Current line highlight" },
+    "selection":           { "key": "editor.selectionBackground",                     "description": "Text selection background" },
+    "indentGuide":         { "key": "editorIndentGuide.background1",                  "description": "Indent guide lines" },
+    "indentGuideActive":   { "key": "editorIndentGuide.activeBackground1",            "description": "Active indent guide lines" },
+    "lineNumber":          { "key": "editorLineNumber.foreground",                    "description": "Line number color" },
+    "lineNumberActive":    { "key": "editorLineNumber.activeForeground",              "description": "Active line number color" },
+    "ruler":               { "key": "editorRuler.foreground",                         "description": "Editor ruler lines" },
+    "bracketMatchBg":      { "key": "editorBracketMatch.background",                  "description": "Matching bracket background" },
+    "bracketMatchBorder":  { "key": "editorBracketMatch.border",                      "description": "Matching bracket border" },
+    "panel":               { "key": "activityBar.background",                         "description": "Activity bar / sidebar / status bar background" },
+    "badge":               { "key": "activityBarBadge.background",                    "description": "Badge background (notification counts)" },
+    "panelForeground":     { "key": "sideBarTitle.foreground",                        "description": "Sidebar title text color" },
+    "tabActive":           { "key": "tab.activeBackground",                           "description": "Active tab background" },
+    "tabInactive":         { "key": "tab.inactiveBackground",                         "description": "Inactive tab background" },
+    "bracket1":            { "key": "editorBracketHighlight.foreground1",              "description": "Rainbow bracket color 1" },
+    "bracket2":            { "key": "editorBracketHighlight.foreground2",              "description": "Rainbow bracket color 2" },
+    "bracket3":            { "key": "editorBracketHighlight.foreground3",              "description": "Rainbow bracket color 3" },
+    "bracket4":            { "key": "editorBracketHighlight.foreground4",              "description": "Rainbow bracket color 4" },
+    "bracket5":            { "key": "editorBracketHighlight.foreground5",              "description": "Rainbow bracket color 5" },
+    "bracket6":            { "key": "editorBracketHighlight.foreground6",              "description": "Rainbow bracket color 6" },
+    "bracketBad":          { "key": "editorBracketHighlight.unexpectedBracket.foreground", "description": "Unexpected/unmatched bracket" }
+  }
+}
