@@ -40,14 +40,12 @@ function parseValue(val) {
 // ── sample code ─────────────────────────────────────────────────────────
 
 const SAMPLE = [
-  [["comment", "// A sample to preview theme colors"]],
   [["keyword", "fn "], ["function", "fibonacci"], ["bracket", "("], ["parameter", "n"], ["operator", ": "], ["type", "u32"], ["bracket", ")"], ["operator", " -> "], ["type", "u32"], ["bracket", " {"]],
   [["keyword.control", "  if "], ["parameter", "n"], ["operator", " <= "], ["number", "1"], ["keyword.control", " return "], ["parameter", "n"]],
   [["keyword", "  let "], ["variable", "result"], ["operator", " = "], ["function", "fibonacci"], ["bracket", "("], ["parameter", "n"], ["operator", " - "], ["number", "1"], ["bracket", ")"]],
   [["keyword.control", "  return "], ["variable", "result"]],
   [["bracket", "}"]],
   [],
-  [["comment", "// Types and strings"]],
   [["keyword", "struct "], ["type.user", "Config"], ["bracket", " {"]],
   [["keyword", "  "], ["property", "name"], ["operator", ": "], ["type", "String"], ["operator", " = "], ["string", "\"hello world\""]],
   [["keyword", "  "], ["property", "count"], ["operator", ": "], ["type", "u32"], ["operator", " = "], ["number", "42"]],
@@ -55,8 +53,8 @@ const SAMPLE = [
   [["keyword", "  "], ["property", "path"], ["operator", ": "], ["type", "String"], ["operator", " = "], ["string", "\"line 1"], ["escape", "\\n"], ["string", "line 2\""]],
   [["bracket", "}"]],
   [],
-  [["comment", "// Global and output params"]],
-  [["keyword", "let "], ["variable.global", "GLOBAL_STATE"], ["operator", " = "], ["number", "0"]],
+  [["comment", "// Globals and output params"]],
+  [["keyword", "let "], ["variable.global", "GLOBAL"], ["operator", " = "], ["number", "0"]],
   [["keyword", "fn "], ["function", "swap"], ["bracket", "("], ["parameter.output", "a"], ["operator", ": "], ["pointer", "*"], ["type", "u32"], ["operator", ", "], ["parameter.output", "b"], ["operator", ": "], ["pointer", "*"], ["type", "u32"], ["bracket", ")"], ["bracket", " {"]],
   [["keyword", "  let "], ["variable", "tmp"], ["operator", " = "], ["pointer", "*"], ["parameter.output", "a"]],
   [["keyword.control", "  "], ["pointer", "*"], ["parameter.output", "a"], ["operator", " = "], ["pointer", "*"], ["parameter.output", "b"]],
@@ -66,13 +64,12 @@ const SAMPLE = [
 
 // ── SVG generation ──────────────────────────────────────────────────────
 
-const FONT_SIZE = 13;
-const LINE_HEIGHT = 19;
-const CHAR_WIDTH = 7.8; // approximate for monospace at 13px
-const PAD_X = 14;
+const FONT_SIZE = 14;
+const LINE_HEIGHT = 20;
+const PAD_X = 16;
 const PAD_Y = 12;
-const LINE_NUM_WIDTH = 28;
-const TITLE_HEIGHT = 32;
+const LINE_NUM_WIDTH = 30;
+const TITLE_HEIGHT = 34;
 
 function generateSVG(theme) {
   const { data } = theme;
@@ -82,7 +79,7 @@ function generateSVG(theme) {
   const lineHighlight = data.ui.lineHighlight;
 
   const contentHeight = SAMPLE.length * LINE_HEIGHT;
-  const width = 520;
+  const width = 380;
   const height = TITLE_HEIGHT + PAD_Y * 2 + contentHeight + PAD_Y;
 
   // Slightly lighter/darker panel color for title bar
@@ -99,7 +96,7 @@ function generateSVG(theme) {
   svg += `<rect width="${width}" height="${TITLE_HEIGHT}" fill="${titleBg}" rx="6"/>\n`;
   svg += `<rect y="${TITLE_HEIGHT - 6}" width="${width}" height="6" fill="${titleBg}"/>\n`;
   const titleColor = data.type === "dark" ? "#cccccc" : "#444444";
-  svg += `<text x="${width / 2}" y="${TITLE_HEIGHT / 2 + 5}" text-anchor="middle" fill="${titleColor}" font-weight="bold" font-size="13">${esc(data.label || data.name)}</text>\n`;
+  svg += `<text x="${width / 2}" y="${TITLE_HEIGHT / 2 + 5}" text-anchor="middle" fill="${titleColor}" font-weight="bold" font-size="14">${esc(data.label || data.name)}</text>\n`;
 
   // Window dots
   svg += `<circle cx="16" cy="${TITLE_HEIGHT / 2}" r="5" fill="#ff5f57" opacity="0.8"/>\n`;

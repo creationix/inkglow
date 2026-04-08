@@ -1,52 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="486" viewBox="0 0 520 486">
-<defs><style>@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&amp;display=swap'); text { font-family: 'Fira Code', monospace; font-size: 13px; font-variant-ligatures: contextual; }</style></defs>
-<rect width="520" height="486" fill="#000000" rx="6"/>
-<rect width="520" height="32" fill="#000000" rx="6"/>
-<rect y="26" width="520" height="6" fill="#000000"/>
-<text x="260" y="21" text-anchor="middle" fill="#cccccc" font-weight="bold" font-size="13">Inkglow Blaze</text>
-<circle cx="16" cy="16" r="5" fill="#ff5f57" opacity="0.8"/>
-<circle cx="32" cy="16" r="5" fill="#febc2e" opacity="0.8"/>
-<circle cx="48" cy="16" r="5" fill="#28c840" opacity="0.8"/>
-<text x="14" y="57" fill="#5f574f"> 1</text>
-<text y="57" xml:space="preserve"><tspan x="42" fill="#83769c" font-style='italic'>// A sample to preview theme colors</tspan></text>
-<text x="14" y="76" fill="#5f574f"> 2</text>
-<text y="76" xml:space="preserve"><tspan x="42" fill="#ffa300">fn </tspan><tspan fill="#00e436">fibonacci</tspan><tspan fill="#83769c">(</tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c">)</tspan><tspan fill="#ff004d"> -&gt; </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c"> {</tspan></text>
-<text x="14" y="95" fill="#5f574f"> 3</text>
-<text y="95" xml:space="preserve"><tspan x="42" fill="#29adff">  if </tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d"> &lt;= </tspan><tspan fill="#ffec27">1</tspan><tspan fill="#29adff"> return </tspan><tspan fill="#29adff" font-style='italic'>n</tspan></text>
-<text x="14" y="114" fill="#5f574f"> 4</text>
-<text y="114" xml:space="preserve"><tspan x="42" fill="#ffa300">  let </tspan><tspan fill="#c2c3c7">result</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">fibonacci</tspan><tspan fill="#83769c">(</tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d"> - </tspan><tspan fill="#ffec27">1</tspan><tspan fill="#83769c">)</tspan></text>
-<text x="14" y="133" fill="#5f574f"> 5</text>
-<text y="133" xml:space="preserve"><tspan x="42" fill="#29adff">  return </tspan><tspan fill="#c2c3c7">result</tspan></text>
-<text x="14" y="152" fill="#5f574f"> 6</text>
-<text y="152" xml:space="preserve"><tspan x="42" fill="#83769c">}</tspan></text>
-<text x="14" y="171" fill="#5f574f"> 7</text>
-<text x="14" y="190" fill="#5f574f"> 8</text>
-<text y="190" xml:space="preserve"><tspan x="42" fill="#83769c" font-style='italic'>// Types and strings</tspan></text>
-<text x="14" y="209" fill="#5f574f"> 9</text>
-<text y="209" xml:space="preserve"><tspan x="42" fill="#ffa300">struct </tspan><tspan fill="#29adff">Config</tspan><tspan fill="#83769c"> {</tspan></text>
-<text x="14" y="228" fill="#5f574f">10</text>
-<text y="228" xml:space="preserve"><tspan x="42" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">name</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">String</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">&quot;hello world&quot;</tspan></text>
-<text x="14" y="247" fill="#5f574f">11</text>
-<text y="247" xml:space="preserve"><tspan x="42" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">count</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ffec27">42</tspan></text>
-<text x="14" y="266" fill="#5f574f">12</text>
-<text y="266" xml:space="preserve"><tspan x="42" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">enabled</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">bool</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ff77a8" font-style='italic'>true</tspan></text>
-<text x="14" y="285" fill="#5f574f">13</text>
-<text y="285" xml:space="preserve"><tspan x="42" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">path</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">String</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">&quot;line 1</tspan><tspan fill="#44e870" font-weight='bold'>\n</tspan><tspan fill="#00e436">line 2&quot;</tspan></text>
-<text x="14" y="304" fill="#5f574f">14</text>
-<text y="304" xml:space="preserve"><tspan x="42" fill="#83769c">}</tspan></text>
-<text x="14" y="323" fill="#5f574f">15</text>
-<text x="14" y="342" fill="#5f574f">16</text>
-<text y="342" xml:space="preserve"><tspan x="42" fill="#83769c" font-style='italic'>// Global and output params</tspan></text>
-<text x="14" y="361" fill="#5f574f">17</text>
-<text y="361" xml:space="preserve"><tspan x="42" fill="#ffa300">let </tspan><tspan fill="#ff77a8">GLOBAL_STATE</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ffec27">0</tspan></text>
-<text x="14" y="380" fill="#5f574f">18</text>
-<text y="380" xml:space="preserve"><tspan x="42" fill="#ffa300">fn </tspan><tspan fill="#00e436">swap</tspan><tspan fill="#83769c">(</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">*</tspan><tspan fill="#29adff">u32</tspan><tspan fill="#ff004d">, </tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">*</tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c">)</tspan><tspan fill="#83769c"> {</tspan></text>
-<text x="14" y="399" fill="#5f574f">19</text>
-<text y="399" xml:space="preserve"><tspan x="42" fill="#ffa300">  let </tspan><tspan fill="#c2c3c7">tmp</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan></text>
-<text x="14" y="418" fill="#5f574f">20</text>
-<text y="418" xml:space="preserve"><tspan x="42" fill="#29adff">  </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan></text>
-<text x="14" y="437" fill="#5f574f">21</text>
-<text y="437" xml:space="preserve"><tspan x="42" fill="#29adff">  </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#c2c3c7">tmp</tspan></text>
-<text x="14" y="456" fill="#5f574f">22</text>
-<text y="456" xml:space="preserve"><tspan x="42" fill="#83769c">}</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="470" viewBox="0 0 440 470">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&amp;display=swap'); text { font-family: 'Fira Code', monospace; font-size: 14px; font-variant-ligatures: contextual; }</style></defs>
+<rect width="440" height="470" fill="#000000" rx="6"/>
+<rect width="440" height="34" fill="#000000" rx="6"/>
+<rect y="28" width="440" height="6" fill="#000000"/>
+<text x="220" y="22" text-anchor="middle" fill="#cccccc" font-weight="bold" font-size="14">Inkglow Blaze</text>
+<circle cx="16" cy="17" r="5" fill="#ff5f57" opacity="0.8"/>
+<circle cx="32" cy="17" r="5" fill="#febc2e" opacity="0.8"/>
+<circle cx="48" cy="17" r="5" fill="#28c840" opacity="0.8"/>
+<text x="16" y="60" fill="#5f574f"> 1</text>
+<text y="60" xml:space="preserve"><tspan x="46" fill="#ffa300">fn </tspan><tspan fill="#00e436">fibonacci</tspan><tspan fill="#83769c">(</tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c">)</tspan><tspan fill="#ff004d"> -&gt; </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c"> {</tspan></text>
+<text x="16" y="80" fill="#5f574f"> 2</text>
+<text y="80" xml:space="preserve"><tspan x="46" fill="#29adff">  if </tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d"> &lt;= </tspan><tspan fill="#ffec27">1</tspan><tspan fill="#29adff"> return </tspan><tspan fill="#29adff" font-style='italic'>n</tspan></text>
+<text x="16" y="100" fill="#5f574f"> 3</text>
+<text y="100" xml:space="preserve"><tspan x="46" fill="#ffa300">  let </tspan><tspan fill="#c2c3c7">result</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">fibonacci</tspan><tspan fill="#83769c">(</tspan><tspan fill="#29adff" font-style='italic'>n</tspan><tspan fill="#ff004d"> - </tspan><tspan fill="#ffec27">1</tspan><tspan fill="#83769c">)</tspan></text>
+<text x="16" y="120" fill="#5f574f"> 4</text>
+<text y="120" xml:space="preserve"><tspan x="46" fill="#29adff">  return </tspan><tspan fill="#c2c3c7">result</tspan></text>
+<text x="16" y="140" fill="#5f574f"> 5</text>
+<text y="140" xml:space="preserve"><tspan x="46" fill="#83769c">}</tspan></text>
+<text x="16" y="160" fill="#5f574f"> 6</text>
+<text x="16" y="180" fill="#5f574f"> 7</text>
+<text y="180" xml:space="preserve"><tspan x="46" fill="#ffa300">struct </tspan><tspan fill="#29adff">Config</tspan><tspan fill="#83769c"> {</tspan></text>
+<text x="16" y="200" fill="#5f574f"> 8</text>
+<text y="200" xml:space="preserve"><tspan x="46" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">name</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">String</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">&quot;hello world&quot;</tspan></text>
+<text x="16" y="220" fill="#5f574f"> 9</text>
+<text y="220" xml:space="preserve"><tspan x="46" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">count</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">u32</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ffec27">42</tspan></text>
+<text x="16" y="240" fill="#5f574f">10</text>
+<text y="240" xml:space="preserve"><tspan x="46" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">enabled</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">bool</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ff77a8" font-style='italic'>true</tspan></text>
+<text x="16" y="260" fill="#5f574f">11</text>
+<text y="260" xml:space="preserve"><tspan x="46" fill="#ffa300">  </tspan><tspan fill="#c2c3c7">path</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">String</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#00e436">&quot;line 1</tspan><tspan fill="#44e870" font-weight='bold'>\n</tspan><tspan fill="#00e436">line 2&quot;</tspan></text>
+<text x="16" y="280" fill="#5f574f">12</text>
+<text y="280" xml:space="preserve"><tspan x="46" fill="#83769c">}</tspan></text>
+<text x="16" y="300" fill="#5f574f">13</text>
+<text x="16" y="320" fill="#5f574f">14</text>
+<text y="320" xml:space="preserve"><tspan x="46" fill="#83769c" font-style='italic'>// Globals and output params</tspan></text>
+<text x="16" y="340" fill="#5f574f">15</text>
+<text y="340" xml:space="preserve"><tspan x="46" fill="#ffa300">let </tspan><tspan fill="#ff77a8">GLOBAL</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#ffec27">0</tspan></text>
+<text x="16" y="360" fill="#5f574f">16</text>
+<text y="360" xml:space="preserve"><tspan x="46" fill="#ffa300">fn </tspan><tspan fill="#00e436">swap</tspan><tspan fill="#83769c">(</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">*</tspan><tspan fill="#29adff">u32</tspan><tspan fill="#ff004d">, </tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan><tspan fill="#ff004d">: </tspan><tspan fill="#29adff">*</tspan><tspan fill="#29adff">u32</tspan><tspan fill="#83769c">)</tspan><tspan fill="#83769c"> {</tspan></text>
+<text x="16" y="380" fill="#5f574f">17</text>
+<text y="380" xml:space="preserve"><tspan x="46" fill="#ffa300">  let </tspan><tspan fill="#c2c3c7">tmp</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan></text>
+<text x="16" y="400" fill="#5f574f">18</text>
+<text y="400" xml:space="preserve"><tspan x="46" fill="#29adff">  </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>a</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan></text>
+<text x="16" y="420" fill="#5f574f">19</text>
+<text y="420" xml:space="preserve"><tspan x="46" fill="#29adff">  </tspan><tspan fill="#29adff">*</tspan><tspan fill="#ffa300" font-style='italic' font-weight='bold'>b</tspan><tspan fill="#ff004d"> = </tspan><tspan fill="#c2c3c7">tmp</tspan></text>
+<text x="16" y="440" fill="#5f574f">20</text>
+<text y="440" xml:space="preserve"><tspan x="46" fill="#83769c">}</tspan></text>
 </svg>
