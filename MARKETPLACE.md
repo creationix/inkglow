@@ -16,6 +16,16 @@ Color themes for VS Code and terminal tools. 9 themes across dark/light variants
 | Inkglow Dusk | dark | NA16 retro palette |
 | Inkglow Gilt | light | NA16 retro palette |
 
+## Preview
+
+### Dark
+
+<img src="screenshots/inkglow.png" width="49%"> <img src="screenshots/inkglow-blaze.png" width="49%"> <img src="screenshots/inkglow-charm.png" width="49%"> <img src="screenshots/inkglow-dusk.png" width="49%"> 
+
+### Light
+
+<img src="screenshots/inkglow-frost.png" width="49%"> <img src="screenshots/inkglow-gilt.png" width="49%"> <img src="screenshots/inkglow-hearth.png" width="49%"> <img src="screenshots/inkglow-quill.png" width="49%"> <img src="screenshots/inkglow-storm.png" width="49%"> 
+
 ## Declarative theme format
 
 Each theme file at the root is a compact JSON mapping of token roles to `"#color style"` values:

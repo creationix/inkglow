@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // Generates SVG preview screenshots from declarative theme files.
-// Outputs to screenshots/ and optionally updates README.md.
+// Optionally generates PNGs via rsvg-convert for the VS Code Marketplace.
 //
 // Usage:
 //   node screenshots.mjs            # generate SVGs
 //   node screenshots.mjs --readme   # also update README.md
+//   node screenshots.mjs --png      # also generate PNGs via rsvg-convert
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { join, basename } from "node:path";
 
 const ROOT = import.meta.dirname;
@@ -187,10 +189,49 @@ function updateReadme(themes) {
   console.log("Updated README.md with preview section.");
 }
 
+// ── MARKETPLACE.md update ────────────────────────────────────────────────
+
+function updateMarketplace(themes) {
+  const mdPath = join(ROOT, "MARKETPLACE.md");
+  let md = readFileSync(mdPath, "utf-8");
+
+  const darks = themes.filter((t) => t.data.type === "dark");
+  const lights = themes.filter((t) => t.data.type === "light");
+
+  let preview = "## Preview\n\n";
+  preview += "### Dark\n\n";
+  for (const t of darks) {
+    const name = basename(t.file, ".json");
+    preview += `<img src="screenshots/${name}.png" width="49%"> `;
+  }
+  preview += "\n\n### Light\n\n";
+  for (const t of lights) {
+    const name = basename(t.file, ".json");
+    preview += `<img src="screenshots/${name}.png" width="49%"> `;
+  }
+  preview += "\n";
+
+  const previewRegex = /## Preview\n[\s\S]*?(?=\n## [^P]|\n## $|$)/;
+  if (previewRegex.test(md)) {
+    md = md.replace(previewRegex, preview);
+  } else {
+    const insertPoint = md.indexOf("\n## Declarative");
+    if (insertPoint !== -1) {
+      md = md.slice(0, insertPoint) + "\n" + preview + md.slice(insertPoint);
+    } else {
+      md += "\n" + preview;
+    }
+  }
+
+  writeFileSync(mdPath, md);
+  console.log("Updated MARKETPLACE.md with PNG previews.");
+}
+
 // ── main ─────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
 const doReadme = args.includes("--readme");
+const doPng = args.includes("--png");
 
 const themes = discoverThemes();
 if (!themes.length) {
@@ -202,14 +243,24 @@ mkdirSync(SCREENSHOTS_DIR, { recursive: true });
 
 for (const theme of themes) {
   const name = basename(theme.file, ".json");
+  const svgPath = join(SCREENSHOTS_DIR, `${name}.svg`);
   const svg = generateSVG(theme);
-  const outPath = join(SCREENSHOTS_DIR, `${name}.svg`);
-  writeFileSync(outPath, svg);
+  writeFileSync(svgPath, svg);
   console.log(`  → screenshots/${name}.svg`);
+
+  if (doPng) {
+    const pngPath = join(SCREENSHOTS_DIR, `${name}.png`);
+    execSync(`rsvg-convert "${svgPath}" -w 760 -o "${pngPath}"`);
+    console.log(`  → screenshots/${name}.png`);
+  }
 }
 
 if (doReadme) {
   updateReadme(themes);
+}
+
+if (doPng) {
+  updateMarketplace(themes);
 }
 
 console.log("\nDone.");
