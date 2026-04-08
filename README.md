@@ -47,10 +47,10 @@ Add the repo with your plugin manager, then set the colorscheme:
 
 ```lua
 -- lazy.nvim
-{ "creationix/inkglow", build = "node build.mjs" }
+{ "creationix/inkglow" }
 
 -- packer
-use { "creationix/inkglow", run = "node build.mjs" }
+use "creationix/inkglow"
 ```
 
 ```vim
