@@ -47,6 +47,7 @@
     "preview:palette": "node preview.mjs --palette",
     "screenshots": "node screenshots.mjs --readme --png",
     "package": "npx @vscode/vsce package --no-dependencies --readme-path MARKETPLACE.md --skip-license",
+    "publish": "npm run package && npx @vscode/vsce publish --no-dependencies --readme-path MARKETPLACE.md --skip-license && npx ovsx publish inkglow-*.vsix",
     "vscode:prepublish": "node build.mjs"
   },
   "engines": {
